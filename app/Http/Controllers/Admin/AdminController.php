@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Supplement;
+use App\Models\Category;
+use App\Models\Supplement as ModelsSupplement;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -13,7 +15,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $supplements = Supplement::all();
+        $supplements = ModelsSupplement::all();
 
         return view('admin.indexAdmin', compact('supplements'));
     }
@@ -23,14 +25,16 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $supplements = Supplement::all();
+        $categories = Category::all();
 
-        return view('admin.create', compact('supplements'));
+        $supplements = ModelsSupplement::all();
+
+        return view('admin.create', compact('supplements', 'categories'));
     }
 
-    public function destroy(Supplement $supplement)
+    public function destroy(ModelsSupplement $supplement)
     {
         $supplement->delete();
 
@@ -38,7 +42,7 @@ class AdminController extends Controller
     }
 
 
-    public function show(Supplement $supplement)
+    public function show(ModelsSupplement $supplement)
     {
         return view('admin.show', compact('$supplements'));;
     }
@@ -52,9 +56,11 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
+
+
         $form_data = $request->all();
 
-        $new_progetto = new Supplement();
+        $new_progetto = new ModelsSupplement();
 
         $new_progetto->fill($form_data);
         $new_progetto->save();

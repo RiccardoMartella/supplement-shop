@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Supplement as AdminSupplement;
+use App\Models\Admin\Supplement;
+use App\Models\Supplement as ModelsSupplement;
 use Illuminate\Http\Request;
 
 
@@ -16,7 +17,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $supplements = AdminSupplement::all();
+        $supplements = ModelsSupplement::all();
 
         return view('progetti.index', compact('supplements'));
     }

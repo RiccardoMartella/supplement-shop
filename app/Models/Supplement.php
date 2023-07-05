@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,13 +11,15 @@ class Supplement extends Model
 
 
     protected $fillable = [
+        'cover_image',
         'nome',
         'descrizione',
-        'prezzo',
+        'prezzo'
     ];
 
-    // public function type()
-    // {
-    //     return $this->belongsTo(Type::class);
-    // }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
